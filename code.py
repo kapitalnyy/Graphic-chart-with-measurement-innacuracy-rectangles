@@ -1,32 +1,35 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
-x = [1, 2, 3]
-y = [2.1, 2.9, 3.8]
-dx = [0.2, 0.15, 0.25]
-dy = [0.3, 0.2, 0.35]
+x = [1, 2, 3, 4]
+y = [2.1, 2.9, 3.8, 5.2]
+
+
+dx = 0.5  
+dy = 0.3  
 
 fig, ax = plt.subplots()
+ax.scatter(x, y, s=2, color='black', zorder=3)
 
-ax.scatter(x, y, color='black', zorder=3, s=1)
-
-for xi, yi, dxi, dyi in zip(x, y, dx, dy):
+for xi, yi in zip(x, y):
     rect = Rectangle(
-        (xi - dxi, yi - dyi),   
-        2*dxi,                 
-        2*dyi,                 
-        alpha=0.9,
+        (xi - dx/2, yi - dy/2), 
+        dx,
+        dy,
+        linewidth=0.8,
         edgecolor='blue',
         facecolor='none',
-        linewidth=0.5
+        zorder=2
     )
     ax.add_patch(rect)
 
 ax.set_xlabel("x")
 ax.set_ylabel("y")
-ax.set_title("Prostokąty niepewności pomiarowych")
+ax.set_title("Prostokąty stałej wielkości")
 ax.grid(True)
-ax.margins(2) #change margins to scale the chart 
+
+
+ax.margins(0.5) #change margins to scale the chart 
 ax.set_aspect('auto') 
 
 plt.show()
